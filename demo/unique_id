@@ -4,4 +4,4 @@ DIR_PATH=$(dirname $0)
 
 cd $DIR_PATH/..
 
-mix run echo.exs
+mix run demo/unique_id.exs

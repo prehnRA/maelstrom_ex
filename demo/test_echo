@@ -4,7 +4,9 @@ DIR_PATH=$(dirname $0)
 
 cd $DIR_PATH/..
 
+mix compile
+
 ./maelstrom/maelstrom test -w echo \
-  --bin script/echo \
+  --bin demo/echo \
   --node-count 1 \
   --time-limit 10

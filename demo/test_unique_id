@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DIR_PATH=$(dirname $0)
+
+cd $DIR_PATH/..
+
+mix compile
+
+./maelstrom/maelstrom test -w unique-ids \
+  --bin demo/unique_id \
+  --time-limit 30 --rate 1000 --node-count 3 \
+  --availability total --nemesis partition

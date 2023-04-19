@@ -7,10 +7,15 @@ defmodule DistSysEx do
     Task.async(fn ->
       Enum.each(stream, fn line ->
         message = Jason.decode!(line)
+        log("Received: #{inspect(message)}")
 
         GenServer.cast(pid, message)
       end)
     end)
+  end
+
+  def log(log) do
+    GenServer.cast(self(), {:log, log})
   end
 
   def send_message(dest, body) do
@@ -108,6 +113,12 @@ defmodule DistSysEx do
         new_node_state = Map.put(node_state, :msg_id, msg_id)
 
         {:noreply, {new_node_state, inner_state}}
+      end
+
+      def handle_cast({:log, log}, state) do
+        IO.warn(log)
+
+        {:noreply, state}
       end
 
       def handle_cast(other, _state) do
