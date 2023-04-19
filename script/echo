@@ -1,0 +1,7 @@
+#!/bin/sh
+
+DIR_PATH=$(dirname $0)
+
+cd $DIR_PATH/..
+
+mix run echo.exs
