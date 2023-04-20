@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DIR_PATH=$(dirname $0)
+
+cd $DIR_PATH/..
+
+mix compile
+
+./maelstrom/maelstrom test -w broadcast \
+  --bin demo/broadcast \
+  --time-limit 20 --rate 10 --node-count 5

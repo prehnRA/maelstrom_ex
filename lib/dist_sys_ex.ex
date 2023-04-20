@@ -50,13 +50,9 @@ defmodule DistSysEx do
 
   def setup_cast_handlers() do
     quote do
-      def run_forever() do
-        {:ok, pid} = GenServer.start_link(__MODULE__, %{})
+      def run_forever(initial_state \\ %{}) do
+        {:ok, pid} = GenServer.start_link(__MODULE__, initial_state)
         take_input_forever(pid) |> Task.await(:infinity)
-      end
-
-      def start_link(opts) do
-        GenServer.start_link(__MODULE__, %{})
       end
 
       @impl true
