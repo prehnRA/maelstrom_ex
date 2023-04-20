@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DIR_PATH=$(dirname $0)
+
+cd $DIR_PATH/..
+
+mix compile
+
+./maelstrom/maelstrom test -w g-counter \
+  --bin demo/g_counter \
+  --node-count 3 --rate 100 --time-limit 20 --nemesis partition

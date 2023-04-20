@@ -1,7 +1,7 @@
 defmodule Broadcast do
   use DistSysEx
 
-  def handle_message(_src, dest, %{"type" => "topology", "topology" => topology}, state) do
+  def handle_message(_src, dest, %{"type" => "topology", "topology" => topology}, state, _) do
     state =
       state
       |> Map.put(:myself, dest)
@@ -17,7 +17,7 @@ defmodule Broadcast do
     {:reply, %{"type" => "topology_ok"}, state}
   end
 
-  def handle_message(src, dest, %{"type" => "broadcast", "message" => message}, %{seen_sets: seen_sets} = state) do
+  def handle_message(src, dest, %{"type" => "broadcast", "message" => message}, %{seen_sets: seen_sets} = state, _) do
     IO.warn("state: #{inspect(state)}")
     IO.warn("src: #{inspect(src)}")
     IO.warn("dest: #{inspect(dest)}")
@@ -46,11 +46,11 @@ defmodule Broadcast do
     {:reply, %{"type" => "broadcast_ok"}, state}
   end
 
-  def handle_message(_src, _dest, %{"type" => "read"}, state) do
+  def handle_message(_src, _dest, %{"type" => "read"}, state, _) do
     {:reply, %{"type" => "read_ok", "messages" => MapSet.to_list(state.values)}, state}
   end
 
-  def handle_message(_src, _dest, %{"type" => "broadcast_ok"}, state) do
+  def handle_message(_src, _dest, %{"type" => "broadcast_ok"}, state, _) do
     {:noreply, state}
   end
 
