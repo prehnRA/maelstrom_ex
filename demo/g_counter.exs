@@ -1,5 +1,5 @@
 defmodule Broadcast do
-  use DistSysEx
+  use Maelstrom
 
   def handle_message(
     src,

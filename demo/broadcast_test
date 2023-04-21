@@ -4,6 +4,8 @@ DIR_PATH=$(dirname $0)
 
 cd $DIR_PATH/..
 
+set -e
+
 mix compile
 
 ./maelstrom/maelstrom test -w broadcast \

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+DIR_PATH=$(dirname $0)
+
+cd $DIR_PATH/..
+
+mix compile
+
+./maelstrom/maelstrom test -w kafka \
+  --bin demo/kafka \
+  --node-count 2 --concurrency 2n --time-limit 20 --rate 1000

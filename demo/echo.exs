@@ -1,5 +1,5 @@
 defmodule Echo do
-  use DistSysEx
+  use Maelstrom
 
   def handle_message(_src, _dest, %{"echo" => echo}, state, _) do
     {:reply, %{"type" => "echo_ok", "echo" => echo}, state}
